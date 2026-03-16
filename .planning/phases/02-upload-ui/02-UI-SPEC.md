@@ -79,15 +79,15 @@ Multiples of 4 only. Matches patterns observed in existing page.
 | Token | Value | Usage |
 |-------|-------|-------|
 | xs | 4px | Icon gaps, inline padding, label-to-bar gap |
-| sm | 8px | Gap between file list rows, gap between input error and field |
-| md | 16px | Default element spacing, input padding (14px vertical / 16px horizontal), gap between form columns |
+| sm | 8px | Gap between file list rows, gap between input error and field, FileListRow vertical padding |
+| md | 16px | Default element spacing, input padding (12px vertical / 16px horizontal), gap between form columns, FileListRow horizontal padding |
 | lg | 24px | Section padding (horizontal), drop zone horizontal padding, gap between stats |
 | xl | 32px | Top margin on submit button area, confirmation card horizontal padding |
 | 2xl | 48px | Drop zone vertical padding, section top/bottom padding internal |
 | 3xl | 64px | Not used within upload component — reserved for page-level |
 
 **Exceptions:**
-- Touch targets on mobile: input fields use `padding: 14px 16px` — minimum tap height is 48px (14+14+20px line height). This meets the 44px minimum touch target without changing the visual design.
+- Touch targets on mobile: input fields use `padding: 12px 16px` — minimum tap height is 44px (12+12+20px line height). This meets the 44px minimum touch target.
 - The upload drop zone has `padding: 48px 24px` — vertical exception to accommodate centered icon + text layout.
 
 **Source:** Measured from `app/page.tsx` ShareStory component inline styles.
@@ -100,16 +100,14 @@ Both fonts are already loaded in the page via Google Fonts link. No additional f
 
 | Role | Font | Size | Weight | Line Height | Usage |
 |------|------|------|--------|-------------|-------|
-| Display / heading | Playfair Display | clamp(26px, 4vw, 38px) | 800 | 1.2 | Section heading "Were you coached by Mouse?" |
-| Subheading | Playfair Display | 24px | 700 | 1.3 | Confirmation card heading |
+| Display / heading | Playfair Display | clamp(26px, 4vw, 38px) | 600 | 1.2 | Section heading "Were you coached by Mouse?" |
+| Subheading | Playfair Display | 24px | 600 | 1.3 | Confirmation card heading |
 | Body | Source Sans 3 | 16px | 400 | 1.7 | Section description paragraph, drop zone primary label |
-| Label / UI text | Source Sans 3 | 14px | 600 | 1.5 | File names in list, CTA button text, input error text |
-| Caption / meta | Source Sans 3 | 13px | 400 | 1.5 | File size in list, permission disclaimer text, progress percentage |
-| Overline | Source Sans 3 | 11px | 700 | 1.0 | Section label "SHARE YOUR STORY" (letter-spacing: 0.2em, all caps) |
+| Label / UI text | Source Sans 3 | 14px | 400 or 600 | 1.5 | File names (400), CTA button (600), input error text (600), file size/meta (400), progress percentage (400), overline "SHARE YOUR STORY" (600, letter-spacing: 0.2em, text-transform: uppercase) |
 
-**Declared weights used in this component: 400 (regular) and 600/700 (semibold/bold).**
+**Declared weights: 400 (regular) and 600 (semibold).** No 700 weight is used. The overline treatment uses `letter-spacing: 0.2em` and `text-transform: uppercase` as visual differentiators — weight 600 is sufficient.
 
-Note: The distinction between 600 and 700 follows the existing page pattern — 600 for UI labels/file names, 700 for buttons and overlines. Both are loaded via Google Fonts `Source+Sans+3:wght@300;400;600;700`.
+**Size consolidation note:** Caption (formerly 13px) and Overline (formerly 11px) are merged into the 14px Label size. Caption/meta uses weight 400. Overline uses weight 600 + letter-spacing + all-caps. Both are visually distinct from the Label body role without requiring separate size tokens.
 
 **Source:** `app/page.tsx` ShareStory and FadeIn components, measured directly.
 
@@ -141,11 +139,11 @@ Phase 2 wires the existing visual prototype to real behavior. The following comp
   - `hidden` — display: none when no upload in progress
   - `active` — fills left-to-right proportional to XHR `progress` event percent
   - `complete` — fills to 100%, held briefly (300ms), then transitions to confirmation
-- **Percentage label:** Source Sans 3, 13px, weight 400, color `#9CA3AF`, right-aligned above or beside the bar
+- **Percentage label:** Source Sans 3, 14px, weight 400, color `#9CA3AF`, right-aligned above or beside the bar
 - **XHR requirement (UPLD-03):** Use `XMLHttpRequest` with `upload.onprogress` event — NOT fetch. This is locked by the requirements.
 
 ### FileListRow (existing shell — needs state)
-- **Appearance (existing):** `background: #2A2A2A`, `padding: 10px 16px`, `borderLeft: 3px solid #B91C1C`
+- **Appearance (existing):** `background: #2A2A2A`, `padding: 8px 16px`, `borderLeft: 3px solid #B91C1C`
 - **Additions for Phase 2:**
   - Upload status indicator: pending (no icon) → uploading (progress text "Uploading…") → done (checkmark via CSS, color `#9CA3AF`) → failed (red "Failed" text + inline retry link)
   - Remove button: `×` character, 14px, color `#9CA3AF`, right side, only visible on hover (desktop) / always visible (mobile)
@@ -176,6 +174,8 @@ Phase 2 wires the existing visual prototype to real behavior. The following comp
 | Default | `#9CA3AF30` |
 | Focus | `#B91C1C` |
 | Error (future Phase 3) | Not in scope for Phase 2 |
+
+Input field padding: `12px 16px` (vertical 12px meets 44px touch target: 12+12+20px line height = 44px).
 
 ---
 
