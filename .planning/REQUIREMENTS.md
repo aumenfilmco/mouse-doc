@@ -8,9 +8,9 @@
 ### Infrastructure
 
 - [ ] **INFRA-01**: Cloudflare R2 bucket is provisioned with correct CORS policy allowing browser PUT uploads
-- [ ] **INFRA-02**: R2 API credentials are stored as Vercel environment variables (never NEXT_PUBLIC_)
-- [ ] **INFRA-03**: `/api/upload/presign` route generates a time-limited signed PUT URL and returns `{ uploadUrl, fileKey }`
-- [ ] **INFRA-04**: Storage keys are generated server-side with UUID prefix to prevent collisions
+- [x] **INFRA-02**: R2 API credentials are stored as Vercel environment variables (never NEXT_PUBLIC_)
+- [x] **INFRA-03**: `/api/upload/presign` route generates a time-limited signed PUT URL and returns `{ uploadUrl, fileKey }`
+- [x] **INFRA-04**: Storage keys are generated server-side with UUID prefix to prevent collisions
 
 ### Metadata
 
@@ -70,9 +70,9 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
-| INFRA-03 | Phase 1 | Pending |
-| INFRA-04 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Complete |
+| INFRA-03 | Phase 1 | Complete |
+| INFRA-04 | Phase 1 | Complete |
 | UPLD-01 | Phase 2 | Pending |
 | UPLD-02 | Phase 2 | Pending |
 | UPLD-03 | Phase 2 | Pending |

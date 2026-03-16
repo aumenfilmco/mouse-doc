@@ -1,3 +1,19 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: planning
+stopped_at: Completed 01-backend-infrastructure 01-01-PLAN.md
+last_updated: "2026-03-16T18:19:12.806Z"
+last_activity: 2026-03-16 — Roadmap created, phases derived from requirements
+progress:
+  total_phases: 3
+  completed_phases: 0
+  total_plans: 2
+  completed_plans: 1
+  percent: 50
+---
+
 # Project State
 
 ## Project Reference
@@ -14,7 +30,7 @@ Plan: 0 of ? in current phase
 Status: Ready to plan
 Last activity: 2026-03-16 — Roadmap created, phases derived from requirements
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
@@ -34,6 +50,7 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 01-backend-infrastructure P01 | 4 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -46,6 +63,9 @@ Recent decisions affecting current work:
 - Architecture: Presigned URL pattern only — file bytes must never touch Vercel functions (4.5 MB limit)
 - Metadata store: Airtable (Chris browses submissions directly, no custom admin UI needed)
 - Upload library: Uppy 5.x or XHR-based custom — decision deferred to Phase 2 planning
+- [Phase 01-backend-infrastructure]: nanoid v5 ESM-only: jest.config.ts needs transformIgnorePatterns and explicit transform to handle with ts-jest
+- [Phase 01-backend-infrastructure]: jest.mock factories must define jest.fn() inline — outer variable references are uninitialized when factory runs
+- [Phase 01-backend-infrastructure]: .env.local.example force-committed despite .env* gitignore — template files that document required env vars must be in the repo
 
 ### Pending Todos
 
@@ -59,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16
-Stopped at: Roadmap written, requirements traced, ready to plan Phase 1
+Last session: 2026-03-16T18:19:12.804Z
+Stopped at: Completed 01-backend-infrastructure 01-01-PLAN.md
 Resume file: None
