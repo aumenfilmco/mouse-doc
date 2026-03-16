@@ -1,13 +1,15 @@
-[
-  {
-    "AllowedOrigins": [
-      "https://www.coachmouse.com",
-      "https://coachmouse.com",
-      "https://mouse-doc.vercel.app"
-    ],
-    "AllowedMethods": ["GET", "PUT"],
-    "AllowedHeaders": ["Content-Type"],
-    "ExposeHeaders": ["ETag"],
-    "MaxAgeSeconds": 3600
-  }
-]
+{
+  "rules": [
+    {
+      "AllowedOrigins": [
+        "https://www.coachmouse.com",
+        "https://coachmouse.com",
+        "https://mouse-doc.vercel.app"
+      ],
+      "AllowedMethods": ["GET", "PUT"],
+      "AllowedHeaders": ["Content-Type"],
+      "ExposeHeaders": ["ETag"],
+      "MaxAgeSeconds": 3600
+    }
+  ]
+}
