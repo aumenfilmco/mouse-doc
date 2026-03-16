@@ -27,7 +27,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. R2 API credentials are not visible in any client-side bundle or network request
   3. Calling `/api/upload/presign` returns a time-limited signed PUT URL and a unique `fileKey` (UUID-prefixed)
   4. The R2 bucket rejects direct public access — files are only reachable via presigned URL
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Install deps, Jest setup, R2 client module, presign route with unit tests
+- [ ] 01-02-PLAN.md — R2 bucket provisioning, CORS config, env vars, browser smoke test
 
 ### Phase 2: Upload UI
 **Goal**: A user on any device can select a file, watch it upload with a progress bar, and get clear feedback if something goes wrong.
@@ -60,6 +64,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Backend Infrastructure | 0/? | Not started | - |
+| 1. Backend Infrastructure | 0/2 | Planning complete | - |
 | 2. Upload UI | 0/? | Not started | - |
 | 3. Form, Metadata, and Confirmation | 0/? | Not started | - |
