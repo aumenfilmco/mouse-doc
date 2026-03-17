@@ -87,8 +87,8 @@ Multiples of 4 only. Identical to Phase 2 — no new tokens.
 | 3xl | 64px | Not used within the form component — reserved for page-level |
 
 **Exceptions:**
-- All input fields use `padding: 14px 16px` (vertical 14px x2 + 20px line height = 48px, exceeds 44px touch target minimum).
-- Textarea uses `padding: 14px 16px`, `minHeight: 120px` (3 visible lines approximate).
+- All input fields use `padding: 12px 16px` (vertical 12px x2 + 20px line height = 44px, meets 44px touch target minimum).
+- Textarea uses `padding: 12px 16px`, `minHeight: 120px` (3 visible lines approximate).
 - The form grid collapses to single column on mobile (< 640px viewport) — gap remains 16px between stacked rows.
 
 **Source:** Inherited from Phase 2 UI-SPEC + `app/components/ShareStory.tsx` measured inline styles.
@@ -104,9 +104,11 @@ Both fonts loaded in `<head>` via Google Fonts. No new font loading needed.
 | Display / heading | Playfair Display | clamp(26px, 4vw, 38px) | 600 | 1.2 | Section heading "Were you coached by Mouse?" |
 | Subheading | Playfair Display | 24px | 600 | 1.3 | Confirmation card heading "Thank you, {name}." |
 | Body | Source Sans 3 | 16px | 400 | 1.7 | Section description paragraph |
-| Label / UI text | Source Sans 3 | 14px | 400 or 600 | 1.5 | Input placeholders (400), button (600), validation error (600), overline "SHARE YOUR STORY" (600 + letter-spacing 0.2em + uppercase), permission disclaimer (400, italic, 12px — legacy, do not change) |
+| Label / UI text | Source Sans 3 | 14px | 400 or 600 | 1.5 | Input placeholders (400), button (600), validation error (600), overline "SHARE YOUR STORY" (600 + letter-spacing 0.2em + uppercase), permission disclaimer (400, italic) — uses 14px label size; italic style alone differentiates it. If existing component renders 12px, normalize to 14px. |
 | Input text | Source Sans 3 | 16px | 400 | 1.5 | Typed content in all input fields and textarea |
 | Textarea placeholder | Source Sans 3 | 16px | 400 | 1.7 | Placeholder text inside textarea |
+
+**Declared sizes: clamp(26px,4vw,38px), 24px, 16px, 14px — 4 sizes maximum.**
 
 **Declared weights: 400 (regular) and 600 (semibold).** The existing submit button uses weight 700 in implementation — do not change it (matches existing Phase 2 output).
 
@@ -130,6 +132,7 @@ Phase 3 extends `app/components/ShareStory.tsx` without extracting new component
 **Email input (FORM-03 — optional)**
 - Type: `<input type="email">`
 - Placeholder: "Email address (optional)"
+- Padding: `12px 16px`
 - Width: full column in a 2-column grid row alongside phone
 - Validation: no required validation; format validation only if non-empty (must contain @)
 - Error: "Please enter a valid email address." — appears below field, Source Sans 3 14px weight 600, color `#B91C1C`
@@ -137,12 +140,14 @@ Phase 3 extends `app/components/ShareStory.tsx` without extracting new component
 **Phone input (FORM-04 — optional)**
 - Type: `<input type="tel">`
 - Placeholder: "Phone number (optional)"
+- Padding: `12px 16px`
 - Width: full column in a 2-column grid row alongside email
 - Validation: no required validation; no format validation in v1
 
 **Textarea for text story (FORM-05 — conditional required)**
 - Type: `<textarea>`
 - Placeholder: "Type your story here — a memory, what he meant to you, something only you know."
+- Padding: `12px 16px`
 - Width: full width (spans both columns)
 - Min height: 120px (approximately 3 visible lines)
 - Resize: vertical only (`resize: vertical`)
