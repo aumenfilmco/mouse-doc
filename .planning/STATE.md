@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-form-metadata-and-confirmation-01-PLAN.md
-last_updated: "2026-03-17T15:43:52.848Z"
+stopped_at: Completed 03-form-metadata-and-confirmation-02-PLAN.md
+last_updated: "2026-03-17T15:48:45.618Z"
 last_activity: 2026-03-16 — Roadmap created, phases derived from requirements
 progress:
   total_phases: 3
   completed_phases: 2
   total_plans: 8
-  completed_plans: 6
+  completed_plans: 7
   percent: 50
 ---
 
@@ -55,6 +55,7 @@ Progress: [█████░░░░░] 50%
 | Phase 02-upload-ui P02 | 3min | 2 tasks | 6 files |
 | Phase 02-upload-ui P03 | 10min | 2 tasks | 1 files |
 | Phase 03-form-metadata-and-confirmation P01 | 3min | 2 tasks | 5 files |
+| Phase 03-form-metadata-and-confirmation PP02 | 2min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,7 @@ Recent decisions affecting current work:
 - [Phase 02-upload-ui]: localhost:3000 and localhost:3001 added to R2 CORS origins — enables local dev uploads without a preview deploy
 - [Phase 03-form-metadata-and-confirmation]: Airtable field names: Name, Connection, Email, Phone, StoryText, FileKey, SubmittedAt — user must create Airtable table with these exact column names
 - [Phase 03-form-metadata-and-confirmation]: validateSubmission collects ALL errors in one pass and returns full errors object — caller decides which to surface (UI shows first in field order)
+- [Phase 03-form-metadata-and-confirmation]: localFileKey captured from upload() return value in handleSubmit — not React state — to avoid stale closure; fileKey state retained as retry handler fallback
 
 ### Pending Todos
 
@@ -92,6 +94,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T15:43:52.846Z
-Stopped at: Completed 03-form-metadata-and-confirmation-01-PLAN.md
+Last session: 2026-03-17T15:48:45.616Z
+Stopped at: Completed 03-form-metadata-and-confirmation-02-PLAN.md
 Resume file: None

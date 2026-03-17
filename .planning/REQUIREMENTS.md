@@ -31,13 +31,13 @@
 - [x] **FORM-02**: User enters their connection to Coach McCollum (required)
 - [x] **FORM-03**: User enters email address (optional)
 - [x] **FORM-04**: User enters phone number (optional)
-- [ ] **FORM-05**: User can type a text story in a textarea as an alternative or addition to file upload
+- [x] **FORM-05**: User can type a text story in a textarea as an alternative or addition to file upload
 - [x] **FORM-06**: Form requires either a file or text story before submission is allowed
 
 ### Confirmation
 
-- [ ] **CONF-01**: User sees a success confirmation screen after submission completes
-- [ ] **CONF-02**: Success screen is personalized with the user's name
+- [x] **CONF-01**: User sees a success confirmation screen after submission completes
+- [x] **CONF-02**: Success screen is personalized with the user's name
 
 ## v2 Requirements
 
@@ -82,12 +82,12 @@
 | FORM-02 | Phase 3 | Complete |
 | FORM-03 | Phase 3 | Complete |
 | FORM-04 | Phase 3 | Complete |
-| FORM-05 | Phase 3 | Pending |
+| FORM-05 | Phase 3 | Complete |
 | FORM-06 | Phase 3 | Complete |
 | META-01 | Phase 3 | Complete |
 | META-02 | Phase 3 | Complete |
-| CONF-01 | Phase 3 | Pending |
-| CONF-02 | Phase 3 | Pending |
+| CONF-01 | Phase 3 | Complete |
+| CONF-02 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 19 total
