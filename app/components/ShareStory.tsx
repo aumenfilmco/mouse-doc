@@ -5,6 +5,7 @@ import UploadZone from "@/app/components/upload/UploadZone";
 import ProgressBar from "@/app/components/upload/ProgressBar";
 import FileListRow from "@/app/components/upload/FileListRow";
 import ErrorBanner from "@/app/components/upload/ErrorBanner";
+import { validateSubmission } from "@/app/utils/validateSubmission";
 
 const COLORS = {
   black: "#111111",
@@ -74,11 +75,28 @@ export default function ShareStory() {
   const [fileKey, setFileKey] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [relation, setRelation] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [textStory, setTextStory] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [fileStatuses, setFileStatuses] = useState<
     Record<number, "pending" | "uploading" | "done" | "failed">
   >({});
   const [hoverSubmit, setHoverSubmit] = useState(false);
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [relationError, setRelationError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [form06Error, setForm06Error] = useState<string | null>(null);
+  const [metadataError, setMetadataError] = useState(false);
+  const [isMetadataPosting, setIsMetadataPosting] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const { upload, progress, status, error, reset } = useFileUpload();
 
@@ -108,43 +126,112 @@ export default function ShareStory() {
   };
 
   const handleSubmit = async () => {
-    const filesToUpload = files
-      .map((f, i) => [i, f] as [number, File])
-      .filter(([i]) => fileStatuses[i] === "pending" || fileStatuses[i] === "failed");
+    // Clear previous errors
+    setNameError(null);
+    setRelationError(null);
+    setEmailError(null);
+    setForm06Error(null);
+    setMetadataError(false);
 
-    for (const [index, file] of filesToUpload) {
-      setFileStatuses((prev) => ({ ...prev, [index]: "uploading" }));
-      const key = await upload(file);
-      if (key) {
-        setFileStatuses((prev) => ({ ...prev, [index]: "done" }));
-        setFileKey(key);
-      } else {
-        setFileStatuses((prev) => ({ ...prev, [index]: "failed" }));
+    // Client-side validation
+    const validation = validateSubmission({
+      name,
+      relation,
+      email,
+      phone,
+      textStory,
+      hasFile: files.length > 0,
+    });
+
+    if (!validation.valid) {
+      if (validation.errors.name) setNameError(validation.errors.name);
+      if (validation.errors.relation) setRelationError(validation.errors.relation);
+      if (validation.errors.email) setEmailError(validation.errors.email);
+      if (validation.errors.form06) setForm06Error(validation.errors.form06);
+      return;
+    }
+
+    // CRITICAL: Capture fileKey from upload() return value, NOT from React state (stale closure risk)
+    let localFileKey = "";
+
+    // File upload path
+    if (files.length > 0) {
+      const filesToUpload = files
+        .map((f, i) => [i, f] as [number, File])
+        .filter(([i]) => fileStatuses[i] === "pending" || fileStatuses[i] === "failed");
+
+      for (const [index, file] of filesToUpload) {
+        setFileStatuses((prev) => ({ ...prev, [index]: "uploading" }));
+        const key = await upload(file);
+        if (key) {
+          setFileStatuses((prev) => ({ ...prev, [index]: "done" }));
+          localFileKey = key; // Capture directly — not from state
+          setFileKey(key); // Also store in state for retry handler
+        } else {
+          setFileStatuses((prev) => ({ ...prev, [index]: "failed" }));
+          return; // Stop on first upload failure — ErrorBanner from useFileUpload will show
+        }
       }
     }
 
-    // After all files processed: if all done, show confirmation
-    const updatedStatuses = { ...fileStatuses };
-    filesToUpload.forEach(([index, file]) => {
-      // We'll check from the state update that happened above
-      // The setSubmitted call needs to happen after all uploads
-    });
-
-    // Check after loop — use functional check via setTimeout to read latest state
-    setTimeout(() => {
-      setFileStatuses((prev) => {
-        const allDone =
-          files.length > 0 && files.every((_, i) => prev[i] === "done");
-        if (allDone) {
-          setSubmitted(true);
-        }
-        return prev;
+    // Metadata POST (both file and text-only paths converge here)
+    setIsMetadataPosting(true);
+    try {
+      const res = await fetch("/api/submit/metadata", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          relation,
+          email,
+          phone,
+          textStory,
+          fileKey: localFileKey,
+        }),
       });
-    }, 0);
+
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setMetadataError(true);
+      }
+    } catch {
+      setMetadataError(true);
+    } finally {
+      setIsMetadataPosting(false);
+    }
+  };
+
+  const handleMetadataRetry = async () => {
+    setMetadataError(false);
+    setIsMetadataPosting(true);
+    try {
+      const res = await fetch("/api/submit/metadata", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          relation,
+          email,
+          phone,
+          textStory,
+          fileKey: fileKey || "", // Use React state fileKey as fallback for retry
+        }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setMetadataError(true);
+      }
+    } catch {
+      setMetadataError(true);
+    } finally {
+      setIsMetadataPosting(false);
+    }
   };
 
   const isUploading = status === "uploading";
-  const isDisabled = isUploading || files.length === 0;
+  const isDisabled = isUploading || isMetadataPosting || (files.length === 0 && textStory.trim().length === 0);
 
   const submitButtonStyle: React.CSSProperties = {
     fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
@@ -159,6 +246,26 @@ export default function ShareStory() {
     alignSelf: "flex-start",
     transition: "background 0.3s",
     opacity: isDisabled ? 0.4 : 1,
+  };
+
+  const inputStyle: React.CSSProperties = {
+    fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+    fontSize: 16,
+    padding: "12px 16px",
+    background: COLORS.midGray,
+    border: `1px solid ${COLORS.warmGray}30`,
+    color: COLORS.white,
+    outline: "none",
+    width: "100%",
+    boxSizing: "border-box",
+  };
+
+  const errorTextStyle: React.CSSProperties = {
+    fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+    fontSize: 14,
+    fontWeight: 600,
+    color: COLORS.red,
+    margin: "4px 0 0",
   };
 
   return (
@@ -228,43 +335,101 @@ export default function ShareStory() {
         {!submitted ? (
           <FadeIn delay={0.3}>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              {/* Name + relation inputs */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              {/* Row 1: Name + relation inputs */}
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    aria-label="Your Name"
+                    aria-required="true"
+                    style={inputStyle}
+                    onFocus={(e) => (e.target.style.borderColor = COLORS.red)}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = `${COLORS.warmGray}30`;
+                      setNameError(null);
+                    }}
+                  />
+                  {nameError && <p role="alert" style={errorTextStyle}>{nameError}</p>}
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Your connection to Coach McCollum"
+                    value={relation}
+                    onChange={(e) => setRelation(e.target.value)}
+                    aria-label="Your connection to Coach McCollum"
+                    aria-required="true"
+                    style={inputStyle}
+                    onFocus={(e) => (e.target.style.borderColor = COLORS.red)}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = `${COLORS.warmGray}30`;
+                      setRelationError(null);
+                    }}
+                  />
+                  {relationError && <p role="alert" style={errorTextStyle}>{relationError}</p>}
+                </div>
+              </div>
+
+              {/* Row 2: Email + phone inputs */}
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Email address (optional)"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    aria-label="Email address (optional)"
+                    style={inputStyle}
+                    onFocus={(e) => (e.target.style.borderColor = COLORS.red)}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = `${COLORS.warmGray}30`;
+                      if (email && !email.includes("@")) {
+                        setEmailError("Please enter a valid email address.");
+                      } else {
+                        setEmailError(null);
+                      }
+                    }}
+                  />
+                  {emailError && <p role="alert" style={errorTextStyle}>{emailError}</p>}
+                </div>
                 <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  style={{
-                    fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
-                    fontSize: 15,
-                    padding: "14px 16px",
-                    background: COLORS.midGray,
-                    border: `1px solid ${COLORS.warmGray}30`,
-                    color: COLORS.white,
-                    outline: "none",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = COLORS.red)}
-                  onBlur={(e) => (e.target.style.borderColor = `${COLORS.warmGray}30`)}
-                />
-                <input
-                  type="text"
-                  placeholder="Your connection to Coach McCollum"
-                  value={relation}
-                  onChange={(e) => setRelation(e.target.value)}
-                  style={{
-                    fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
-                    fontSize: 15,
-                    padding: "14px 16px",
-                    background: COLORS.midGray,
-                    border: `1px solid ${COLORS.warmGray}30`,
-                    color: COLORS.white,
-                    outline: "none",
-                  }}
+                  type="tel"
+                  placeholder="Phone number (optional)"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  aria-label="Phone number (optional)"
+                  style={inputStyle}
                   onFocus={(e) => (e.target.style.borderColor = COLORS.red)}
                   onBlur={(e) => (e.target.style.borderColor = `${COLORS.warmGray}30`)}
                 />
               </div>
+
+              {/* Row 3: Textarea */}
+              <textarea
+                placeholder="Type your story here — a memory, what he meant to you, something only you know."
+                value={textStory}
+                onChange={(e) => { setTextStory(e.target.value); if (form06Error) setForm06Error(null); }}
+                aria-label="Your story"
+                style={{
+                  fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+                  fontSize: 16,
+                  lineHeight: 1.7,
+                  padding: "12px 16px",
+                  background: COLORS.midGray,
+                  border: `1px solid ${COLORS.warmGray}30`,
+                  color: COLORS.white,
+                  outline: "none",
+                  minHeight: 120,
+                  resize: "vertical" as const,
+                  width: "100%",
+                  boxSizing: "border-box" as const,
+                }}
+                onFocus={(e) => (e.target.style.borderColor = COLORS.red)}
+                onBlur={(e) => (e.target.style.borderColor = `${COLORS.warmGray}30`)}
+              />
 
               {/* Upload zone */}
               <UploadZone onFilesSelected={handleFileSelection} disabled={isUploading} />
@@ -286,7 +451,7 @@ export default function ShareStory() {
               {/* Progress bar */}
               <ProgressBar progress={progress} status={status} />
 
-              {/* Error banner */}
+              {/* Error banner (upload errors) */}
               {error && (
                 <ErrorBanner
                   message={error}
@@ -294,6 +459,60 @@ export default function ShareStory() {
                     reset();
                   }}
                 />
+              )}
+
+              {/* MetadataErrorBanner */}
+              {metadataError && (
+                <div
+                  role="alert"
+                  style={{
+                    background: `${COLORS.darkRed}20`,
+                    border: `1px solid ${COLORS.red}`,
+                    padding: "12px 16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span style={{
+                    fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: COLORS.red,
+                  }}>
+                    We couldn&apos;t save your submission. Your file is safe — please try again.
+                  </span>
+                  <button
+                    onClick={handleMetadataRetry}
+                    disabled={isMetadataPosting}
+                    style={{
+                      fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: COLORS.red,
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                      textDecoration: "underline",
+                    }}
+                  >
+                    Try again
+                  </button>
+                </div>
+              )}
+
+              {/* FORM-06 validation error */}
+              {form06Error && (
+                <p role="alert" style={{
+                  fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: COLORS.red,
+                  margin: 0,
+                }}>
+                  {form06Error}
+                </p>
               )}
 
               {/* Submit button */}
@@ -304,7 +523,7 @@ export default function ShareStory() {
                 onMouseEnter={() => setHoverSubmit(true)}
                 onMouseLeave={() => setHoverSubmit(false)}
               >
-                {isUploading ? "UPLOADING..." : "SUBMIT YOUR STORY"}
+                {isUploading ? "UPLOADING..." : isMetadataPosting ? "SAVING..." : "SUBMIT YOUR STORY"}
               </button>
 
               {/* Permission disclaimer */}
