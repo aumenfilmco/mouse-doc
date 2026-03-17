@@ -13,7 +13,7 @@ The site already has a landing page. What's missing is everything behind the "Sh
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Backend Infrastructure** - R2 bucket provisioned, CORS verified, presigned URL endpoint working with a real browser PUT
-- [ ] **Phase 2: Upload UI** - ShareStory component wired to presign endpoint, XHR progress bar, error handling, iOS file picker
+- [x] **Phase 2: Upload UI** - ShareStory component wired to presign endpoint, XHR progress bar, error handling, iOS file picker (completed 2026-03-17)
 - [ ] **Phase 3: Form, Metadata, and Confirmation** - All form fields wired, Airtable metadata write, text-only path, success confirmation screen
 
 ## Phase Details
@@ -43,7 +43,7 @@ Plans:
   3. A progress bar is visible and updates in real time during the upload
   4. If the upload fails, a clear error message and a retry button appear — no silent failure
   5. Only video and audio files are accepted; selecting a wrong file type shows a validation error before upload starts
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 - [ ] 02-01-PLAN.md — File validation utility + useFileUpload XHR hook with TDD unit tests
@@ -70,5 +70,5 @@ Phases execute in numeric order: 1 -> 2 -> 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Backend Infrastructure | 1/2 | In Progress|  |
-| 2. Upload UI | 2/3 | In Progress|  |
+| 2. Upload UI | 3/3 | Complete   | 2026-03-17 |
 | 3. Form, Metadata, and Confirmation | 0/? | Not started | - |

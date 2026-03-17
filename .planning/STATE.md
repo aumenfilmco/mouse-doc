@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-upload-ui-02-PLAN.md
-last_updated: "2026-03-17T12:51:58.927Z"
+stopped_at: Completed 02-upload-ui-03-PLAN.md
+last_updated: "2026-03-17T14:55:18.188Z"
 last_activity: 2026-03-16 — Roadmap created, phases derived from requirements
 progress:
   total_phases: 3
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 4
+  completed_plans: 5
   percent: 50
 ---
 
@@ -53,6 +53,7 @@ Progress: [█████░░░░░] 50%
 | Phase 01-backend-infrastructure P01 | 4 | 2 tasks | 7 files |
 | Phase 02-upload-ui P01 | 3 | 2 tasks | 4 files |
 | Phase 02-upload-ui P02 | 3min | 2 tasks | 6 files |
+| Phase 02-upload-ui P03 | 10min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -73,6 +74,8 @@ Recent decisions affecting current work:
 - [Phase 02-upload-ui]: flushMicrotasks pattern (setTimeout 0) used in tests to await fetch resolution before accessing xhrInstance after async boundary
 - [Phase 02-upload-ui]: FadeIn/RedBar/COLORS duplicated in ShareStory.tsx — inline styles per component convention, no shared utilities introduced
 - [Phase 02-upload-ui]: Sequential for...of upload loop + setTimeout(0) post-loop to read latest fileStatuses state — React batching requires async read
+- [Phase 02-upload-ui]: CORS cors.json updated to Cloudflare native format (allowed.origins nested object) — required by wrangler 4.74; local dev uploads now work without deploying
+- [Phase 02-upload-ui]: localhost:3000 and localhost:3001 added to R2 CORS origins — enables local dev uploads without a preview deploy
 
 ### Pending Todos
 
@@ -86,6 +89,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T12:51:58.924Z
-Stopped at: Completed 02-upload-ui-02-PLAN.md
+Last session: 2026-03-17T14:55:18.186Z
+Stopped at: Completed 02-upload-ui-03-PLAN.md
 Resume file: None
