@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Backend Infrastructure** - R2 bucket provisioned, CORS verified, presigned URL endpoint working with a real browser PUT
 - [x] **Phase 2: Upload UI** - ShareStory component wired to presign endpoint, XHR progress bar, error handling, iOS file picker (completed 2026-03-17)
-- [ ] **Phase 3: Form, Metadata, and Confirmation** - All form fields wired, Airtable metadata write, text-only path, success confirmation screen
+- [x] **Phase 3: Form, Metadata, and Confirmation** - All form fields wired, Airtable metadata write, text-only path, success confirmation screen (completed 2026-03-17)
 
 ## Phase Details
 
@@ -60,7 +60,7 @@ Plans:
   3. A text-only submission (no file) creates an Airtable record containing the typed story text and all form fields
   4. After a successful submission, the user sees a confirmation screen personalized with their name
   5. Chris can open Airtable and see all submissions with enough context to identify and retrieve each one
-**Plans:** 1/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 - [ ] 03-01-PLAN.md — Validation utility + Airtable metadata route handler with TDD tests
@@ -76,4 +76,4 @@ Phases execute in numeric order: 1 -> 2 -> 3
 |-------|----------------|--------|-----------|
 | 1. Backend Infrastructure | 1/2 | In Progress|  |
 | 2. Upload UI | 3/3 | Complete    | 2026-03-17 |
-| 3. Form, Metadata, and Confirmation | 1/3 | In Progress|  |
+| 3. Form, Metadata, and Confirmation | 3/3 | Complete   | 2026-03-17 |
