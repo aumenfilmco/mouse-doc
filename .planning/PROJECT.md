@@ -12,22 +12,21 @@ Former wrestlers and community members can easily submit their stories (video, a
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ User can upload video or audio files via drag-and-drop or file browser — Phase 2
+- ✓ Uploaded files are stored in cost-effective cloud storage and accessible to Chris — Phase 1 (Cloudflare R2) + NAS sync
+- ✓ User can optionally type their story as text instead of (or in addition to) uploading a file — Phase 3
+- ✓ User submits their name and connection to Coach McCollum alongside their story — Phase 3
+- ✓ Upload works on mobile (phone camera roll / voice memo) and desktop — Phase 2
+- ✓ User sees a success confirmation after submission — Phase 3
 
 ### Active
 
-- [ ] User can upload video or audio files via drag-and-drop or file browser
-- [ ] Uploaded files are stored in cost-effective cloud storage and accessible to Chris
-- [ ] User can optionally type their story as text instead of (or in addition to) uploading a file
-- [ ] User submits their name and connection to Coach McCollum alongside their story
-- [ ] Upload works on mobile (phone camera roll / voice memo) and desktop
-- [ ] Large files (100MB+) are supported for desktop uploads
-- [ ] User sees a success confirmation after submission
+- [ ] Large files (100MB+) are supported for desktop uploads (untested — R2 supports up to 5GB via presigned PUT, but not verified with real large files)
 
 ### Out of Scope
 
 - User accounts / authentication — anonymous submissions only, no login required
-- Admin dashboard — Chris accesses files directly from storage provider UI
+- Admin dashboard — Chris accesses files directly from Airtable + NAS sync
 - Video playback / preview in-browser — files are for research, not display
 - Real-time transcription or processing — raw files only
 
@@ -50,8 +49,11 @@ Former wrestlers and community members can easily submit their stories (video, a
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Storage provider | Need to evaluate R2, B2, S3 on price + DX | — Pending (research phase) |
-| Text input alongside upload | Users who can't/won't record can still contribute | — Pending |
+| Storage provider | Need to evaluate R2, B2, S3 on price + DX | Cloudflare R2 — zero egress fees, ~$0.23/month estimated, S3-compatible |
+| Text input alongside upload | Users who can't/won't record can still contribute | Shipped — textarea + text-only submission path both live |
+| Metadata store | Chris browses submissions without a custom admin UI | Airtable — all submissions write Name, Connection, Email, Phone, StoryText, FileKey, SubmittedAt |
+| File delivery to Chris | Files in R2 need to reach Chris without manual downloads | Hourly rclone sync to QNAP NAS at `Aumen Film Co/2026/Mouse Documentary/00_Preproduction` |
+| Presigned URL architecture | File bytes must never touch Vercel functions (4.5MB limit) | Browser PUTs directly to R2 via presigned URL — Vercel only issues the URL |
 
 ---
-*Last updated: 2026-03-16 after initialization*
+*Last updated: 2026-03-17 after Phase 3 — v1.0 milestone complete*

@@ -12,7 +12,7 @@ The site already has a landing page. What's missing is everything behind the "Sh
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Backend Infrastructure** - R2 bucket provisioned, CORS verified, presigned URL endpoint working with a real browser PUT
+- [x] **Phase 1: Backend Infrastructure** - R2 bucket provisioned, CORS verified, presigned URL endpoint working with a real browser PUT (completed 2026-03-17)
 - [x] **Phase 2: Upload UI** - ShareStory component wired to presign endpoint, XHR progress bar, error handling, iOS file picker (completed 2026-03-17)
 - [x] **Phase 3: Form, Metadata, and Confirmation** - All form fields wired, Airtable metadata write, text-only path, success confirmation screen (completed 2026-03-17)
 
@@ -27,7 +27,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. R2 API credentials are not visible in any client-side bundle or network request
   3. Calling `/api/upload/presign` returns a time-limited signed PUT URL and a unique `fileKey` (UUID-prefixed)
   4. The R2 bucket rejects direct public access — files are only reachable via presigned URL
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] 01-01-PLAN.md — Install deps, Jest setup, R2 client module, presign route with unit tests
@@ -74,6 +74,6 @@ Phases execute in numeric order: 1 -> 2 -> 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Backend Infrastructure | 1/2 | In Progress|  |
+| 1. Backend Infrastructure | 1/2 | Complete    | 2026-03-17 |
 | 2. Upload UI | 3/3 | Complete    | 2026-03-17 |
 | 3. Form, Metadata, and Confirmation | 3/3 | Complete   | 2026-03-17 |
