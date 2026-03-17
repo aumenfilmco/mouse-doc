@@ -43,7 +43,7 @@ Plans:
   3. A progress bar is visible and updates in real time during the upload
   4. If the upload fails, a clear error message and a retry button appear — no silent failure
   5. Only video and audio files are accepted; selecting a wrong file type shows a validation error before upload starts
-**Plans:** 3 plans
+**Plans:** 1/3 plans executed
 
 Plans:
 - [ ] 02-01-PLAN.md — File validation utility + useFileUpload XHR hook with TDD unit tests
@@ -70,5 +70,5 @@ Phases execute in numeric order: 1 -> 2 -> 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Backend Infrastructure | 1/2 | In Progress|  |
-| 2. Upload UI | 0/3 | Not started | - |
+| 2. Upload UI | 1/3 | In Progress|  |
 | 3. Form, Metadata, and Confirmation | 0/? | Not started | - |

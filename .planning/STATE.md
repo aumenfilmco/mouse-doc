@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-backend-infrastructure 01-01-PLAN.md
-last_updated: "2026-03-16T18:19:12.806Z"
+stopped_at: Completed 02-upload-ui-01-PLAN.md
+last_updated: "2026-03-17T12:46:38.318Z"
 last_activity: 2026-03-16 — Roadmap created, phases derived from requirements
 progress:
   total_phases: 3
-  completed_phases: 0
-  total_plans: 2
-  completed_plans: 1
+  completed_phases: 1
+  total_plans: 5
+  completed_plans: 3
   percent: 50
 ---
 
@@ -51,6 +51,7 @@ Progress: [█████░░░░░] 50%
 
 *Updated after each plan completion*
 | Phase 01-backend-infrastructure P01 | 4 | 2 tasks | 7 files |
+| Phase 02-upload-ui P01 | 3 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -66,6 +67,9 @@ Recent decisions affecting current work:
 - [Phase 01-backend-infrastructure]: nanoid v5 ESM-only: jest.config.ts needs transformIgnorePatterns and explicit transform to handle with ts-jest
 - [Phase 01-backend-infrastructure]: jest.mock factories must define jest.fn() inline — outer variable references are uninitialized when factory runs
 - [Phase 01-backend-infrastructure]: .env.local.example force-committed despite .env* gitignore — template files that document required env vars must be in the repo
+- [Phase 02-upload-ui]: performUpload exported as standalone async function so tests avoid React test utilities — useFileUpload wraps it with setState
+- [Phase 02-upload-ui]: jest-environment-jsdom installed as devDependency (Jest 28+ no longer ships it by default) — needed for XHR mock in upload hook tests
+- [Phase 02-upload-ui]: flushMicrotasks pattern (setTimeout 0) used in tests to await fetch resolution before accessing xhrInstance after async boundary
 
 ### Pending Todos
 
@@ -79,6 +83,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T18:19:12.804Z
-Stopped at: Completed 01-backend-infrastructure 01-01-PLAN.md
+Last session: 2026-03-17T12:46:38.316Z
+Stopped at: Completed 02-upload-ui-01-PLAN.md
 Resume file: None
