@@ -19,8 +19,8 @@
 
 ### Upload UI
 
-- [ ] **UPLD-01**: User can select a file via tap/click button (iOS-compatible `<input type="file">`)
-- [ ] **UPLD-02**: User can drag-and-drop a file on desktop
+- [x] **UPLD-01**: User can select a file via tap/click button (iOS-compatible `<input type="file">`)
+- [x] **UPLD-02**: User can drag-and-drop a file on desktop
 - [x] **UPLD-03**: User sees a progress bar during upload (XHR-based, not fetch)
 - [x] **UPLD-04**: User sees a clear error message and retry button if upload fails
 - [x] **UPLD-05**: Upload accepts video and audio files (video/*, audio/*)
@@ -73,8 +73,8 @@
 | INFRA-02 | Phase 1 | Complete |
 | INFRA-03 | Phase 1 | Complete |
 | INFRA-04 | Phase 1 | Complete |
-| UPLD-01 | Phase 2 | Pending |
-| UPLD-02 | Phase 2 | Pending |
+| UPLD-01 | Phase 2 | Complete |
+| UPLD-02 | Phase 2 | Complete |
 | UPLD-03 | Phase 2 | Complete |
 | UPLD-04 | Phase 2 | Complete |
 | UPLD-05 | Phase 2 | Complete |

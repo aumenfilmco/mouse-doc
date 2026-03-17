@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-upload-ui-01-PLAN.md
-last_updated: "2026-03-17T12:46:38.318Z"
+stopped_at: Completed 02-upload-ui-02-PLAN.md
+last_updated: "2026-03-17T12:51:58.927Z"
 last_activity: 2026-03-16 — Roadmap created, phases derived from requirements
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 5
-  completed_plans: 3
+  completed_plans: 4
   percent: 50
 ---
 
@@ -52,6 +52,7 @@ Progress: [█████░░░░░] 50%
 *Updated after each plan completion*
 | Phase 01-backend-infrastructure P01 | 4 | 2 tasks | 7 files |
 | Phase 02-upload-ui P01 | 3 | 2 tasks | 4 files |
+| Phase 02-upload-ui P02 | 3min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -70,6 +71,8 @@ Recent decisions affecting current work:
 - [Phase 02-upload-ui]: performUpload exported as standalone async function so tests avoid React test utilities — useFileUpload wraps it with setState
 - [Phase 02-upload-ui]: jest-environment-jsdom installed as devDependency (Jest 28+ no longer ships it by default) — needed for XHR mock in upload hook tests
 - [Phase 02-upload-ui]: flushMicrotasks pattern (setTimeout 0) used in tests to await fetch resolution before accessing xhrInstance after async boundary
+- [Phase 02-upload-ui]: FadeIn/RedBar/COLORS duplicated in ShareStory.tsx — inline styles per component convention, no shared utilities introduced
+- [Phase 02-upload-ui]: Sequential for...of upload loop + setTimeout(0) post-loop to read latest fileStatuses state — React batching requires async read
 
 ### Pending Todos
 
@@ -83,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T12:46:38.316Z
-Stopped at: Completed 02-upload-ui-01-PLAN.md
+Last session: 2026-03-17T12:51:58.924Z
+Stopped at: Completed 02-upload-ui-02-PLAN.md
 Resume file: None
