@@ -60,7 +60,7 @@ Plans:
   3. A text-only submission (no file) creates an Airtable record containing the typed story text and all form fields
   4. After a successful submission, the user sees a confirmation screen personalized with their name
   5. Chris can open Airtable and see all submissions with enough context to identify and retrieve each one
-**Plans:** 3 plans
+**Plans:** 1/3 plans executed
 
 Plans:
 - [ ] 03-01-PLAN.md — Validation utility + Airtable metadata route handler with TDD tests
@@ -76,4 +76,4 @@ Phases execute in numeric order: 1 -> 2 -> 3
 |-------|----------------|--------|-----------|
 | 1. Backend Infrastructure | 1/2 | In Progress|  |
 | 2. Upload UI | 3/3 | Complete    | 2026-03-17 |
-| 3. Form, Metadata, and Confirmation | 0/3 | Not started | - |
+| 3. Form, Metadata, and Confirmation | 1/3 | In Progress|  |

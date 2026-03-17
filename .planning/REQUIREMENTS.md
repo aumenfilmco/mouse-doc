@@ -14,8 +14,8 @@
 
 ### Metadata
 
-- [ ] **META-01**: `/api/submit/metadata` route saves submission record to Airtable after upload confirms
-- [ ] **META-02**: Submission record includes: name, email, phone, connection to Coach McCollum, file key (or text story), timestamp
+- [x] **META-01**: `/api/submit/metadata` route saves submission record to Airtable after upload confirms
+- [x] **META-02**: Submission record includes: name, email, phone, connection to Coach McCollum, file key (or text story), timestamp
 
 ### Upload UI
 
@@ -27,12 +27,12 @@
 
 ### Form
 
-- [ ] **FORM-01**: User enters their name (required)
-- [ ] **FORM-02**: User enters their connection to Coach McCollum (required)
-- [ ] **FORM-03**: User enters email address (optional)
-- [ ] **FORM-04**: User enters phone number (optional)
+- [x] **FORM-01**: User enters their name (required)
+- [x] **FORM-02**: User enters their connection to Coach McCollum (required)
+- [x] **FORM-03**: User enters email address (optional)
+- [x] **FORM-04**: User enters phone number (optional)
 - [ ] **FORM-05**: User can type a text story in a textarea as an alternative or addition to file upload
-- [ ] **FORM-06**: Form requires either a file or text story before submission is allowed
+- [x] **FORM-06**: Form requires either a file or text story before submission is allowed
 
 ### Confirmation
 
@@ -78,14 +78,14 @@
 | UPLD-03 | Phase 2 | Complete |
 | UPLD-04 | Phase 2 | Complete |
 | UPLD-05 | Phase 2 | Complete |
-| FORM-01 | Phase 3 | Pending |
-| FORM-02 | Phase 3 | Pending |
-| FORM-03 | Phase 3 | Pending |
-| FORM-04 | Phase 3 | Pending |
+| FORM-01 | Phase 3 | Complete |
+| FORM-02 | Phase 3 | Complete |
+| FORM-03 | Phase 3 | Complete |
+| FORM-04 | Phase 3 | Complete |
 | FORM-05 | Phase 3 | Pending |
-| FORM-06 | Phase 3 | Pending |
-| META-01 | Phase 3 | Pending |
-| META-02 | Phase 3 | Pending |
+| FORM-06 | Phase 3 | Complete |
+| META-01 | Phase 3 | Complete |
+| META-02 | Phase 3 | Complete |
 | CONF-01 | Phase 3 | Pending |
 | CONF-02 | Phase 3 | Pending |
 

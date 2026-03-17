@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-upload-ui-03-PLAN.md
-last_updated: "2026-03-17T14:58:51.945Z"
+stopped_at: Completed 03-form-metadata-and-confirmation-01-PLAN.md
+last_updated: "2026-03-17T15:43:52.848Z"
 last_activity: 2026-03-16 — Roadmap created, phases derived from requirements
 progress:
   total_phases: 3
   completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
+  total_plans: 8
+  completed_plans: 6
   percent: 50
 ---
 
@@ -54,6 +54,7 @@ Progress: [█████░░░░░] 50%
 | Phase 02-upload-ui P01 | 3 | 2 tasks | 4 files |
 | Phase 02-upload-ui P02 | 3min | 2 tasks | 6 files |
 | Phase 02-upload-ui P03 | 10min | 2 tasks | 1 files |
+| Phase 03-form-metadata-and-confirmation P01 | 3min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -76,6 +77,8 @@ Recent decisions affecting current work:
 - [Phase 02-upload-ui]: Sequential for...of upload loop + setTimeout(0) post-loop to read latest fileStatuses state — React batching requires async read
 - [Phase 02-upload-ui]: CORS cors.json updated to Cloudflare native format (allowed.origins nested object) — required by wrangler 4.74; local dev uploads now work without deploying
 - [Phase 02-upload-ui]: localhost:3000 and localhost:3001 added to R2 CORS origins — enables local dev uploads without a preview deploy
+- [Phase 03-form-metadata-and-confirmation]: Airtable field names: Name, Connection, Email, Phone, StoryText, FileKey, SubmittedAt — user must create Airtable table with these exact column names
+- [Phase 03-form-metadata-and-confirmation]: validateSubmission collects ALL errors in one pass and returns full errors object — caller decides which to surface (UI shows first in field order)
 
 ### Pending Todos
 
@@ -89,6 +92,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T14:55:18.186Z
-Stopped at: Completed 02-upload-ui-03-PLAN.md
+Last session: 2026-03-17T15:43:52.846Z
+Stopped at: Completed 03-form-metadata-and-confirmation-01-PLAN.md
 Resume file: None
