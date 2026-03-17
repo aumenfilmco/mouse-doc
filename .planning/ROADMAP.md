@@ -27,7 +27,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. R2 API credentials are not visible in any client-side bundle or network request
   3. Calling `/api/upload/presign` returns a time-limited signed PUT URL and a unique `fileKey` (UUID-prefixed)
   4. The R2 bucket rejects direct public access — files are only reachable via presigned URL
-**Plans:** 1/2 plans executed
+**Plans:** 2 plans
 
 Plans:
 - [ ] 01-01-PLAN.md — Install deps, Jest setup, R2 client module, presign route with unit tests
@@ -43,7 +43,12 @@ Plans:
   3. A progress bar is visible and updates in real time during the upload
   4. If the upload fails, a clear error message and a retry button appear — no silent failure
   5. Only video and audio files are accepted; selecting a wrong file type shows a validation error before upload starts
-**Plans**: TBD
+**Plans:** 3 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — File validation utility + useFileUpload XHR hook with TDD unit tests
+- [ ] 02-02-PLAN.md — Extract ShareStory, build sub-components (UploadZone, ProgressBar, FileListRow, ErrorBanner), wire to hook
+- [ ] 02-03-PLAN.md — Deploy preview and manual device verification (iOS Safari, desktop drag-drop, progress, errors)
 
 ### Phase 3: Form, Metadata, and Confirmation
 **Goal**: A complete submission reaches Chris — form fields captured, file keyed in R2, metadata record in Airtable, and the user sees a warm confirmation.
@@ -60,10 +65,10 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3
+Phases execute in numeric order: 1 -> 2 -> 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Backend Infrastructure | 1/2 | In Progress|  |
-| 2. Upload UI | 0/? | Not started | - |
+| 2. Upload UI | 0/3 | Not started | - |
 | 3. Form, Metadata, and Confirmation | 0/? | Not started | - |
