@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { Suspense, useState, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { useFileUpload } from "@/app/hooks/useFileUpload";
 import UploadZone from "@/app/components/upload/UploadZone";
 import ProgressBar from "@/app/components/upload/ProgressBar";
@@ -70,6 +71,15 @@ function RedBar({ width = 80, style = {} }: { width?: number; style?: React.CSSP
 }
 
 export default function SharePage() {
+  return (
+    <Suspense>
+      <SharePageContent />
+    </Suspense>
+  );
+}
+
+function SharePageContent() {
+  const searchParams = useSearchParams();
   const [files, setFiles] = useState<File[]>([]);
   const [fileKey, setFileKey] = useState<string | null>(null);
   const [name, setName] = useState("");
@@ -91,6 +101,14 @@ export default function SharePage() {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+
+  // Pre-fill from query params (e.g. /share?name=John&email=john@example.com)
+  useEffect(() => {
+    const paramName = searchParams.get("name");
+    const paramEmail = searchParams.get("email");
+    if (paramName) setName(paramName);
+    if (paramEmail) setEmail(paramEmail);
+  }, [searchParams]);
 
   const { upload, progress, status, error, reset } = useFileUpload();
 
