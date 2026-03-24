@@ -462,7 +462,7 @@ function TypeformEmbed() {
               border: "0px",
               maxWidth: 1000,
               width: "100%",
-              height: 1350,
+              height: 550,
               overflow: "hidden",
             }}
             title="Share Your Story Form"
