@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import ShareStory from "@/app/components/ShareStory";
 
 const COLORS = {
   black: "#111111",
@@ -380,6 +379,100 @@ function Footer() {
   );
 }
 
+// ─── TYPEFORM EMBED ───
+function TypeformEmbed() {
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      if (e.data.type === "redirect" && e.data.url) {
+        window.location.href = e.data.url;
+      }
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, []);
+
+  return (
+    <section
+      id="story"
+      style={{
+        background: COLORS.darkGray,
+        padding: "100px 24px",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Noise texture overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.03,
+          pointerEvents: "none",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+      />
+      <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <FadeIn>
+          <p
+            style={{
+              fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              color: COLORS.red,
+              marginBottom: 16,
+            }}
+          >
+            GET INVOLVED
+          </p>
+          <RedBar />
+        </FadeIn>
+        <FadeIn delay={0.15}>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "clamp(26px, 4vw, 38px)",
+              fontWeight: 800,
+              color: COLORS.white,
+              lineHeight: 1.2,
+              margin: "28px 0 16px",
+            }}
+          >
+            Were you coached by Mouse?
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+              fontSize: 16,
+              color: COLORS.warmGray,
+              lineHeight: 1.7,
+              marginBottom: 36,
+            }}
+          >
+            We&apos;re collecting stories from former wrestlers, students, colleagues, and community
+            members to help shape this documentary. Fill out the form below to share your memories
+            of Coach McCollum.
+          </p>
+        </FadeIn>
+        <FadeIn delay={0.3}>
+          <iframe
+            src="https://forms.aumen.co/F6az9Q"
+            scrolling="yes"
+            style={{
+              border: "0px",
+              maxWidth: 1000,
+              width: "100%",
+              height: 1350,
+              overflow: "hidden",
+            }}
+            title="Share Your Story Form"
+          />
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
 // ─── MAIN ───
 export default function MouseLandingPage() {
   return (
@@ -398,7 +491,7 @@ export default function MouseLandingPage() {
       <div style={{ minHeight: "100vh" }}>
         <Hero />
         <About />
-        <ShareStory />
+        <TypeformEmbed />
         <Sponsorship />
         <Footer />
       </div>
