@@ -13,8 +13,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.coachmouse.com"),
   title: "MOUSE — 50 Years on the Mat",
-  description: "Share your story of Coach Dave 'Mouse' McCollum and his 50 years on the wrestling mat.",
+  description:
+    "A feature-length documentary honoring Coach Dave 'Mouse' McCollum — the winningest wrestling coach in District 3 history. Share your story.",
+  openGraph: {
+    type: "website",
+    siteName: "MOUSE Documentary",
+    locale: "en_US",
+    title: "MOUSE — 50 Years on the Mat",
+    description:
+      "A feature-length documentary honoring Coach Dave 'Mouse' McCollum — the winningest wrestling coach in District 3 history.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MOUSE — 50 Years on the Mat",
+    description:
+      "A feature-length documentary honoring Coach Dave 'Mouse' McCollum — the winningest wrestling coach in District 3 history.",
+  },
 };
 
 export default function RootLayout({
