@@ -238,7 +238,7 @@ function Teaser() {
             }}
           >
             <iframe
-              src="https://www.youtube.com/embed/gbHKJCCgO7A?rel=0"
+              src="https://www.youtube.com/embed/XpFvdlAZV4g?rel=0"
               title="MOUSE — 50 Years on the Mat (Teaser)"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
