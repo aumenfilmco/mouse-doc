@@ -455,9 +455,15 @@ function Footer() {
         </p>
         <p style={{
           fontFamily: "'Source Sans 3', sans-serif", fontSize: 12,
-          color: COLORS.warmGray + "80", margin: 0,
+          color: COLORS.warmGray + "80", margin: "0 0 8px",
         }}>
           © 2026 Aumen Film Co. All rights reserved.
+        </p>
+        <p style={{
+          fontFamily: "'Source Sans 3', sans-serif", fontSize: 11,
+          color: COLORS.warmGray + "60", margin: 0,
+        }}>
+          This site uses cookies for analytics and advertising.
         </p>
       </div>
     </footer>
