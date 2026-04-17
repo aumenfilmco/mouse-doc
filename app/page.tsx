@@ -173,6 +173,91 @@ function Hero() {
   );
 }
 
+// ─── TEASER ───
+function Teaser() {
+  return (
+    <section
+      id="teaser"
+      style={{
+        background: COLORS.black,
+        padding: "100px 24px",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.03,
+          pointerEvents: "none",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+      />
+      <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <FadeIn>
+          <p
+            style={{
+              fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              color: COLORS.red,
+              marginBottom: 16,
+            }}
+          >
+            WATCH THE TEASER
+          </p>
+          <RedBar />
+        </FadeIn>
+        <FadeIn delay={0.15}>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "clamp(26px, 4vw, 38px)",
+              fontWeight: 800,
+              color: COLORS.white,
+              lineHeight: 1.2,
+              margin: "28px 0 36px",
+            }}
+          >
+            A first look at the film.
+          </h2>
+        </FadeIn>
+        <FadeIn delay={0.3}>
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              paddingBottom: "56.25%",
+              height: 0,
+              overflow: "hidden",
+              background: COLORS.midGray,
+              borderLeft: `3px solid ${COLORS.red}`,
+              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+            }}
+          >
+            <iframe
+              src="https://www.youtube.com/embed/gbHKJCCgO7A?rel=0"
+              title="MOUSE — 50 Years on the Mat (Teaser)"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                border: 0,
+              }}
+            />
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
 // ─── ABOUT ───
 function About() {
   return (
@@ -490,6 +575,7 @@ export default function MouseLandingPage() {
       `}</style>
       <div style={{ minHeight: "100vh" }}>
         <Hero />
+        <Teaser />
         <About />
         <TypeformEmbed />
         <Sponsorship />
