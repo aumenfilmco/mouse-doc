@@ -33,6 +33,15 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# MCP config (contains API keys — do not commit)
+.mcp.json
+
+# Claude Code per-user workspace state (worktrees, sessions, local settings)
+.claude/
+
+# Local Claude Code skills (not shared via repo)
+/skills/
+
 # vercel
 .vercel
 
