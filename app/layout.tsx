@@ -5,6 +5,7 @@ import "./globals.css";
 
 const META_PIXEL_ID = "436850605424202";
 const LINKEDIN_PARTNER_ID = "9978313";
+const CLARITY_PROJECT_ID = "wft89h3mlr";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -90,6 +91,13 @@ export default function RootLayout({
             src={`https://px.ads.linkedin.com/collect/?pid=${LINKEDIN_PARTNER_ID}&fmt=gif`}
           />
         </noscript>
+        <Script id="ms-clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "${CLARITY_PROJECT_ID}");`}
+        </Script>
         {children}
       </body>
     </html>
