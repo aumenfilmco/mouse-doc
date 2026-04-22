@@ -140,7 +140,7 @@ function Hero() {
             onMouseEnter={e => (e.target as HTMLAnchorElement).style.background = COLORS.darkRed}
             onMouseLeave={e => (e.target as HTMLAnchorElement).style.background = COLORS.red}
           >
-            SHARE YOUR STORY
+            JOIN THE LIST
           </a>
           <a href="#sponsor" style={{
             fontFamily: "'Source Sans 3', sans-serif",
@@ -529,7 +529,7 @@ function TypeformEmbed() {
               margin: "28px 0 16px",
             }}
           >
-            Were you coached by Mouse?
+            Join the community following the film.
           </h2>
           <p
             style={{
@@ -541,8 +541,8 @@ function TypeformEmbed() {
             }}
           >
             We&apos;re collecting stories from former wrestlers, students, colleagues, and community
-            members to help shape this documentary. Fill out the form below to share your memories
-            of Coach McCollum.
+            members &mdash; and keeping everyone else posted as the film comes together. Fill out
+            the form to do either.
           </p>
         </FadeIn>
         <FadeIn delay={0.3}>
@@ -556,7 +556,7 @@ function TypeformEmbed() {
               height: 550,
               overflow: "hidden",
             }}
-            title="Share Your Story Form"
+            title="Join the Community Form"
           />
         </FadeIn>
       </div>
