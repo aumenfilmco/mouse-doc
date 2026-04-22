@@ -66,6 +66,8 @@ function extractFields(body: unknown): {
         const n = Number(value);
         if (!Number.isNaN(n)) attrs.GRAD_YEAR = n;
       } else if (label.includes("story")) attrs.STORY_TEXT = value;
+      else if (label.includes("archival") || label.includes("footage")) attrs.ARCHIVAL = value;
+      else if (label.includes("considered") || label.includes("interview")) attrs.INTERVIEW_INTEREST = value;
     }
   };
 
@@ -88,6 +90,10 @@ function extractFields(body: unknown): {
     if (ageStr && !Number.isNaN(Number(ageStr))) attrs.AGE = Number(ageStr);
     const story = pick(obj, ["Do you have a story to share? Type it here.", "story", "Story"]);
     if (story) attrs.STORY_TEXT = story;
+    const archival = pick(obj, ["Do you have archival footage to share?", "archival"]);
+    if (archival) attrs.ARCHIVAL = archival;
+    const interview = pick(obj, ["Want to be considered for an interview?", "interview"]);
+    if (interview) attrs.INTERVIEW_INTEREST = interview;
     if (email || attrs.FIRSTNAME) rawMatched = true;
 
     // Shape B: { data: {...} } or { submission: {...} } or { payload: {...} }
